@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carnality vs Divinity &mdash; Zion's Gates Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A227;--gold-light:#E2C04E;--gold-pale:#F0DFA0;--gold-dark:#9E7B1A;--gold-deep:#7A5F12;
+  --fire:#D4533B;--fire-bright:#E8705A;--fire-pale:#F2A899;--fire-deep:#8B2E1A;
+  --ember:#FF8C42;--ember-pale:#FFB880;
+  --charcoal:#1A1410;--charcoal-mid:#2D2520;--charcoal-light:#4A3F35;
+  --deep:#0F0A06;--deep-mid:#1A1410;--deep-warm:#2D2218;
+  --cream:#FBF8F1;--cream-warm:#F5EFE0;--cream-deep:#EDE4D0;
+  --white:#FFFFFF;--text:#1A1410;--text-light:#2D2520;--text-muted:#6B6458;
+  --radius:14px;
+  --shadow-soft:0 2px 16px rgba(26,20,16,0.08);
+  --shadow-mid:0 4px 28px rgba(26,20,16,0.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:18px}
+body{font-family:'Lora',Georgia,serif;color:var(--text);background:var(--cream);line-height:1.78;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;line-height:1.15}
+.page{max-width:700px;margin:0 auto;padding:0 24px}
+.section{padding:48px 0}
+.prose p{margin-bottom:20px;font-size:1rem}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--charcoal-mid);font-weight:700}
+.prose em{color:var(--gold-dark);font-style:normal;font-weight:600}
+
+/* ===== COVER ===== */
+.cover{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(175deg,#0F0A06 0%,#1A1410 20%,#2D2218 50%,#1A1410 80%,#0F0A06 100%);
+  position:relative;overflow:hidden}
+.ember-particle{position:absolute;pointer-events:none;opacity:0;border-radius:50%;animation:float-up linear infinite}
+.ember-particle:nth-child(1){width:4px;height:4px;background:rgba(212,83,59,0.6);left:10%;animation-duration:8s;animation-delay:0s}
+.ember-particle:nth-child(2){width:3px;height:3px;background:rgba(201,162,39,0.5);left:22%;animation-duration:10s;animation-delay:-2s}
+.ember-particle:nth-child(3){width:5px;height:5px;background:rgba(255,140,66,0.4);left:35%;animation-duration:12s;animation-delay:-4s}
+.ember-particle:nth-child(4){width:3px;height:3px;background:rgba(212,83,59,0.5);left:48%;animation-duration:9s;animation-delay:-1s}
+.ember-particle:nth-child(5){width:4px;height:4px;background:rgba(201,162,39,0.4);left:62%;animation-duration:11s;animation-delay:-3s}
+.ember-particle:nth-child(6){width:3px;height:3px;background:rgba(255,140,66,0.5);left:75%;animation-duration:8s;animation-delay:-5s}
+.ember-particle:nth-child(7){width:4px;height:4px;background:rgba(212,83,59,0.3);left:88%;animation-duration:10s;animation-delay:-2s}
+@keyframes float-up{0%{bottom:-5%;opacity:0;transform:translateX(0) scale(0.5)}15%{opacity:0.8}50%{transform:translateX(-6px) scale(1);opacity:0.5}85%{opacity:0.1}100%{bottom:105%;opacity:0;transform:translateX(4px) scale(0.3)}}
+.fire-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse at bottom,rgba(212,83,59,0.06) 0%,rgba(201,162,39,0.03) 30%,transparent 70%);pointer-events:none}
+.cover-wrap{position:relative;z-index:2;padding:48px 24px}
+.cover-logo{width:120px;height:auto;margin:0 auto 24px;display:block;filter:drop-shadow(0 0 20px rgba(201,162,39,0.2));animation:logo-breathe 5s ease-in-out infinite}
+@keyframes logo-breathe{0%,100%{filter:drop-shadow(0 0 12px rgba(201,162,39,0.15))}50%{filter:drop-shadow(0 0 28px rgba(201,162,39,0.35))}}
+.cover-series{display:inline-block;padding:6px 20px;border:1px solid rgba(201,162,39,0.25);border-radius:40px;font-family:'Nunito',sans-serif;font-size:0.5rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
+.cover h1{font-size:clamp(2.2rem,7vw,3.8rem);font-weight:700;color:var(--white);margin-bottom:4px;letter-spacing:1px}
+.cover h1 .fire{display:block;background:linear-gradient(135deg,var(--fire),var(--ember),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cover h1 .vs{font-size:clamp(0.9rem,2.5vw,1.2rem);font-weight:400;font-style:italic;color:rgba(255,255,255,0.25);display:block;margin:8px 0;letter-spacing:4px}
+.cover h1 .divine{display:block;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cover-meta{font-family:'Nunito',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:28px}
+.cover-foot{font-family:'Nunito',sans-serif;font-size:0.45rem;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.08);margin-top:40px}
+
+/* ===== SCRIPTURE RIBBON ===== */
+.ribbon{text-align:center;padding:28px 24px;background:linear-gradient(135deg,rgba(201,162,39,0.04),rgba(212,83,59,0.03));border-top:1.5px solid rgba(201,162,39,0.12);border-bottom:1.5px solid rgba(201,162,39,0.12)}
+.ribbon-ref{font-family:'Nunito',sans-serif;font-size:0.5rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold-dark);margin-bottom:10px}
+.ribbon p{font-family:'Lora',serif;font-size:1rem;font-style:italic;color:var(--text-muted);max-width:600px;margin:0 auto;line-height:1.75}
+.ribbon em{color:var(--gold-dark);font-style:normal;font-weight:600}
+
+/* ===== SECTION HEAD ===== */
+.s-head{padding:56px 24px 44px;text-align:center;background:linear-gradient(170deg,var(--deep),var(--deep-mid),var(--deep-warm));position:relative;overflow:hidden}
+.s-head::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(201,162,39,0.03) 0%,transparent 70%);border-radius:50%}
+.s-num{font-family:'Nunito',sans-serif;font-size:0.5rem;font-weight:800;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;position:relative;z-index:2}
+.s-head h2{font-size:clamp(1.3rem,4vw,1.9rem);color:var(--white);position:relative;z-index:2;margin-bottom:12px;max-width:600px;margin-left:auto;margin-right:auto}
+.s-head h2 em{color:var(--gold-light);font-style:normal}
+.s-sub{font-family:'Lora',serif;font-size:0.85rem;font-style:italic;color:rgba(255,255,255,0.3);position:relative;z-index:2;max-width:500px;margin:0 auto}
+
+/* ===== DARK PANEL ===== */
+.dark-panel{margin:32px 0;padding:32px;background:linear-gradient(145deg,var(--deep),var(--deep-mid));border-radius:var(--radius);border:1px solid rgba(201,162,39,0.1)}
+.dp-label{font-family:'Nunito',sans-serif;font-size:0.5rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.dark-panel h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;color:var(--white);margin-bottom:14px}
+.dark-panel p{font-size:0.92rem;color:rgba(255,255,255,0.7);line-height:1.75;margin-bottom:12px}
+.dark-panel p:last-child{margin-bottom:0}
+.dark-panel strong{color:var(--gold-pale);font-weight:700}
+.dark-panel em{color:var(--gold-light);font-style:normal;font-weight:600}
+
+/* ===== SPLIT ===== */
+.split{display:grid;grid-template-columns:1fr 1fr;margin:36px 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-mid)}
+@media(max-width:640px){.split{grid-template-columns:1fr}}
+.split-old,.split-new{padding:36px 32px}
+.split-old{background:#FFF0EC;border-right:3px solid var(--fire)}
+.split-new{background:#FFF9EE;border-left:3px solid var(--gold)}
+@media(max-width:640px){.split-old{border-right:none;border-bottom:3px solid var(--fire)}.split-new{border-left:none;border-top:3px solid var(--gold)}}
+.split-tag{font-family:'Nunito',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px}
+.split-old .split-tag{color:var(--fire)}
+.split-new .split-tag{color:var(--gold-dark)}
+.split h3{font-size:1.05rem;margin-bottom:12px;line-height:1.3}
+.split-old h3{color:var(--fire-deep)}
+.split-new h3{color:var(--gold-deep)}
+.split p{font-size:0.9rem;line-height:1.7}
+.split-old p{color:#6B3A22}
+.split-new p{color:#5A4A2A}
+
+/* ===== RECOGNITION ===== */
+.recognition{margin:36px 0;padding:32px 36px;border-radius:var(--radius);background:var(--white);border:2px solid var(--gold);box-shadow:0 0 0 0 rgba(201,162,39,0.15);animation:pulse-gold 3s ease-in-out infinite;position:relative}
+@keyframes pulse-gold{0%,100%{box-shadow:0 0 0 0 rgba(201,162,39,0.15)}50%{box-shadow:0 0 0 8px rgba(201,162,39,0.04)}}
+.rec-tag{font-family:'Nunito',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--fire);margin-bottom:12px}
+.recognition p{font-size:1rem;color:var(--text);line-height:1.75}
+.recognition strong{color:var(--gold-dark)}
+
+/* ===== TERM CARD ===== */
+.term-card{margin:36px 0;padding:40px 36px;background:linear-gradient(150deg,var(--deep),var(--deep-mid));border-radius:var(--radius);border:2px solid var(--gold);box-shadow:0 0 28px rgba(201,162,39,0.08);text-align:center}
+.term-label{font-family:'Lora',serif;font-size:0.95rem;font-style:italic;color:rgba(255,255,255,0.45);margin-bottom:20px;line-height:1.65}
+.term-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;color:var(--gold-light);margin-bottom:10px}
+.term-def{font-family:'Lora',serif;font-size:0.95rem;color:rgba(255,255,255,0.55);line-height:1.7;max-width:480px;margin:0 auto}
+
+/* ===== GRAND QUOTE ===== */
+.gq{margin:40px 0;padding:44px 36px;text-align:center;position:relative}
+.gq::before{content:'\201C';font-family:Georgia,serif;font-size:7rem;color:rgba(201,162,39,0.06);position:absolute;top:-16px;left:50%;transform:translateX(-50%);line-height:1}
+.gq blockquote{font-family:'Lora',serif;font-size:1.1rem;font-style:italic;color:var(--charcoal-mid);line-height:1.75;max-width:540px;margin:0 auto;position:relative;z-index:2}
+.gq .attr{font-family:'Nunito',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--fire);margin-top:14px}
+
+/* ===== PATTERN DIAGRAM ===== */
+.pattern-flow{margin:32px 0;padding:40px 24px;background:linear-gradient(150deg,var(--deep),var(--deep-mid));border-radius:var(--radius);border:2px solid var(--gold);box-shadow:0 0 28px rgba(201,162,39,0.06)}
+.pattern-label{font-family:'Nunito',sans-serif;font-size:0.5rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:24px}
+.pattern-steps{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 auto}
+.p-node{padding:16px 18px;background:rgba(201,162,39,0.1);border:1.5px solid rgba(201,162,39,0.25);border-radius:12px;text-align:center;min-width:95px;transition:all 0.3s}
+.p-node:hover{background:rgba(201,162,39,0.2);transform:translateY(-2px)}
+.p-node h4{font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;color:var(--white);margin-bottom:3px}
+.p-node p{font-family:'Lora',serif;font-size:0.55rem;color:rgba(255,255,255,0.4);line-height:1.3}
+.p-arrow{display:flex;align-items:center;color:var(--gold);font-size:1rem;opacity:0.35}
+@media(max-width:640px){.pattern-steps{flex-direction:column;align-items:center}.p-arrow{transform:rotate(90deg)}}
+
+/* ===== EXAMPLES GRID ===== */
+.examples-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+@media(max-width:640px){.examples-grid{grid-template-columns:1fr}}
+.ex-card{padding:24px;border-radius:var(--radius);background:var(--white);border:1.5px solid var(--cream-deep);box-shadow:var(--shadow-soft);position:relative;overflow:hidden}
+.ex-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:2px 0 0 2px}
+.ex-fire::before{background:var(--fire)}
+.ex-gold::before{background:var(--gold)}
+.ex-ember::before{background:var(--ember)}
+.ex-deep::before{background:var(--charcoal-mid)}
+.ex-label{font-family:'Nunito',sans-serif;font-size:0.5rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+.ex-fire .ex-label{color:var(--fire)}
+.ex-gold .ex-label{color:var(--gold-dark)}
+.ex-ember .ex-label{color:var(--ember)}
+.ex-deep .ex-label{color:var(--charcoal-light)}
+.ex-card h3{font-size:0.95rem;color:var(--text);margin-bottom:6px}
+.ex-card p{font-size:0.85rem;color:var(--text-muted);line-height:1.65}
+
+/* ===== THINK ===== */
+.think{margin:36px 0;padding:32px 36px;background:linear-gradient(135deg,rgba(201,162,39,0.04),rgba(212,83,59,0.03));border-radius:var(--radius);border-left:5px solid var(--gold)}
+.think-label{font-family:'Nunito',sans-serif;font-size:0.5rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--fire);margin-bottom:14px}
+.think p{font-size:0.92rem;color:var(--text-light);line-height:1.75;margin-bottom:12px}
+.think p:last-child{margin-bottom:0}
+
+/* ===== SELF VS CHRIST DIAGRAM ===== */
+.consciousness-viz{position:relative;width:100%;max-width:420px;margin:24px auto;height:220px}
+.c-circle{position:absolute;width:160px;height:160px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+.c-self{background:rgba(212,83,59,0.08);border:2.5px solid var(--fire);left:40px;top:30px;animation:dim-pulse 4s ease-in-out infinite}
+.c-christ{background:rgba(201,162,39,0.08);border:2.5px solid var(--gold);right:40px;top:30px;animation:glow-pulse 4s ease-in-out infinite}
+@keyframes dim-pulse{0%,100%{opacity:0.7;transform:scale(1)}50%{opacity:0.4;transform:scale(0.95)}}
+@keyframes glow-pulse{0%,100%{opacity:0.7;transform:scale(1);box-shadow:0 0 0 rgba(201,162,39,0)}50%{opacity:1;transform:scale(1.05);box-shadow:0 0 32px rgba(201,162,39,0.2)}}
+.c-circle h4{font-family:'Nunito',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.c-self h4{color:var(--fire)}
+.c-christ h4{color:var(--gold-dark)}
+.c-circle p{font-family:'Lora',serif;font-size:0.6rem;color:var(--text-muted);margin-top:4px;line-height:1.4;padding:0 12px}
+.c-arrow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Nunito',sans-serif;font-size:1.8rem;color:var(--gold);opacity:0.6;animation:shift-arrow 3s ease-in-out infinite}
+@keyframes shift-arrow{0%,100%{transform:translate(-50%,-50%) translateX(-4px);opacity:0.3}50%{transform:translate(-50%,-50%) translateX(4px);opacity:0.8}}
+@media(max-width:480px){.consciousness-viz{transform:scale(0.78);transform-origin:top center;height:170px}}
+
+/* ===== DIVIDERS ===== */
+.gold-rule{display:flex;align-items:center;justify-content:center;gap:16px;padding:24px}
+.rule-line{flex:1;max-width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.2}
+.rule-diamond{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);opacity:0.3}
+
+.ch-divider{text-align:center;padding:16px;position:relative}
+.ch-divider::before{content:'';position:absolute;top:50%;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,162,39,0.15),var(--gold),rgba(201,162,39,0.15),transparent)}
+.div-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);position:relative;z-index:2;box-shadow:0 0 8px rgba(201,162,39,0.3)}
+
+/* ===== FINALE ===== */
+.finale{padding:80px 24px;text-align:center;background:linear-gradient(175deg,var(--deep),var(--deep-mid),var(--deep-warm));position:relative;overflow:hidden}
+.finale::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:500px;height:250px;background:radial-gradient(ellipse at bottom,rgba(201,162,39,0.04) 0%,transparent 70%);pointer-events:none}
+.finale-logo{width:60px;height:auto;margin:0 auto 20px;display:block;filter:drop-shadow(0 0 16px rgba(201,162,39,0.2));opacity:0.6}
+.finale h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;color:var(--white);margin-bottom:16px;position:relative;z-index:2}
+.finale h2 span{color:var(--gold-light)}
+.finale p{font-family:'Lora',serif;font-size:0.92rem;color:rgba(255,255,255,0.35);max-width:500px;margin:0 auto 14px;line-height:1.75;position:relative;z-index:2}
+.finale p:last-child{margin-bottom:0}
+
+/* ===== FOOTER ===== */
+footer{text-align:center;padding:28px 24px;background:#080502}
+footer p{font-family:'Lora',serif;font-size:0.75rem;font-style:italic;color:rgba(201,162,39,0.15);margin-bottom:8px}
+footer .brand{font-family:'Nunito',sans-serif;font-size:0.45rem;font-style:normal;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.06)}
+</style>
+</head>
+<body>
+
+
+<!-- ======================== COVER ======================== -->
+<div class="cover">
+  <div class="ember-particle"></div><div class="ember-particle"></div><div class="ember-particle"></div>
+  <div class="ember-particle"></div><div class="ember-particle"></div><div class="ember-particle"></div>
+  <div class="ember-particle"></div>
+  <div class="fire-glow"></div>
+  <div class="cover-wrap">
+    <div class="cover-series">Zion's Gates &middot; New Series</div>
+    <img src="/zions-logo.png" alt="Zion's Gates Ministries" class="cover-logo">
+    <h1>
+      <span class="fire">Carnality</span>
+      <span class="vs">versus</span>
+      <span class="divine">Divinity</span>
+    </h1>
+    <div class="cover-meta">Pastor Tasha &middot; Zion's Gates Ministries</div>
+    <div class="cover-foot">KingdomBuilders AI &middot; Sermon Notes</div>
+  </div>
+</div>
+
+
+<!-- ===== FOUNDATIONAL SCRIPTURE ===== -->
+<div class="ribbon">
+  <div class="ribbon-ref">2 Peter 1:2&ndash;4 &middot; Foundational Scripture</div>
+  <p>Grace and peace be multiplied to you in the <em>knowledge of God</em> and of Jesus our Lord, as His divine power has given to us <em>all things</em> that pertain to life and godliness, through the knowledge of Him who called us by glory and virtue, by which have been given to us exceedingly great and precious promises, that through these you may be <em>partakers of the divine nature</em>, having escaped the corruption that is in the world through lust.</p>
+</div>
+
+
+<!-- ======================== I. THE SHIFT ======================== -->
+<div class="s-head">
+  <div class="s-num">The Core</div>
+  <h2>The Shift Is Not What You Think It Is</h2>
+  <div class="s-sub">It is not a move of God. It is a move in your understanding.</div>
+</div>
+
+<div class="section"><div class="page"><div class="prose">
+
+<p>When you hear the word <strong>"shift"</strong> in church, your mind goes to revival. The spirit falls. People are healed. The room shakes. But the shift God is bringing right now is different. It is not an event. It is an <em>awareness</em>.</p>
+
+<p>The shift is in how you perceive. How you see. How you understand who you are and what you carry. Once you get a certain level of knowledge, your life begins to change. You stop perishing. You stop going through things you don't need to go through because you finally have an understanding.</p>
+
+<div class="ribbon">
+  <div class="ribbon-ref">Hosea 4:6</div>
+  <p>"My people perish for <em>lack of knowledge</em>."</p>
+</div>
+
+<div class="recognition">
+  <div class="rec-tag">This Changes Everything</div>
+  <p>If you want grace and you want peace, you need the knowledge of God. You cannot remain ignorant and ask for more peace. Grace and peace are <strong>multiplied to you in the knowledge of God</strong>. The more knowledge, the more understanding you have of the Christ within &mdash; the stronger you walk, the more you take.</p>
+</div>
+
+<div class="gq">
+  <blockquote>This teaching is going to anchor us in our true identity as believers in Christ.</blockquote>
+  <div class="attr">Pastor Tasha</div>
+</div>
+
+</div></div></div>
+
+<div class="ch-divider"><div class="div-dot"></div></div>
+
+
+<!-- ======================== II. THE PATTERN ======================== -->
+<div class="s-head">
+  <div class="s-num">The Pattern</div>
+  <h2>God Always Follows the <em>Same Blueprint</em></h2>
+  <div class="s-sub">He calls a man. Consecrates. Fills. Sends. Takes a region.</div>
+</div>
+
+<div class="section"><div class="page"><div class="prose">
+
+<p>Every time God wants to do something in the earth, He follows the same pattern. Over and over in scripture &mdash; the same sequence. He doesn't need a mass of people. He needs a few who will sanctify themselves.</p>
+
+<div class="pattern-flow">
+  <div class="pattern-label">God's Pattern in Scripture</div>
+  <div class="pattern-steps">
+    <div class="p-node"><h4>Calls</h4><p>One person</p></div>
+    <div class="p-arrow">&rarr;</div>
+    <div class="p-node"><h4>Consecrates</h4><p>Dies to world</p></div>
+    <div class="p-arrow">&rarr;</div>
+    <div class="p-node"><h4>Fills</h4><p>His Spirit</p></div>
+    <div class="p-arrow">&rarr;</div>
+    <div class="p-node"><h4>Sends</h4><p>To a people</p></div>
+    <div class="p-arrow">&rarr;</div>
+    <div class="p-node"><h4>Takes</h4><p>A region</p></div>
+  </div>
+</div>
+
+<p>That individual has to be consecrated to the Lord. Nothing can move them. Money can't move them. Titles can't move them. Positions can't move them. They are not tied to this world. They know they are here for a reason, and that reason is <em>His mandate</em>.</p>
+
+<p>God finds that person, sanctifies them, prunes them, deals with deep heart issues, mindsets, lies they believed, identity issues &mdash; and brings them into alignment with who He says they are. Then He puts His Spirit upon and <em>in</em> that person. Then He sends them to a people.</p>
+
+<div class="ribbon">
+  <div class="ribbon-ref">Joshua 1:5&ndash;8</div>
+  <p>"No man shall be able to stand before you all the days of your life. As I was with Moses, so I will be with you. I will not leave you nor forsake you. Be strong and of good courage. This Book of the Law shall not depart from your mouth, but you shall meditate in it day and night &mdash; for then <em>you will make your way prosperous</em>, and then you will have good success."</p>
+</div>
+
+<div class="ribbon">
+  <div class="ribbon-ref">Joshua 3:5</div>
+  <p>"Sanctify yourselves, for tomorrow the Lord will do <em>wonders</em> among you."</p>
+</div>
+
+<div class="dark-panel">
+  <div class="dp-label">The Commission</div>
+  <h3>God speaks to one. The one speaks to a group. The group sanctifies themselves. They take the land.</h3>
+  <p>Put away the stuff that defiles you. Anything that's not like Him, put it away. Anything that would grieve Him, walk away from it. Die to it. Because <strong>God wants to do something great in our midst</strong>.</p>
+</div>
+
+<p>This is what we see with Joshua. Moses dies. God calls Joshua, charges him, commissions him. Then Joshua goes to the people and tells them: <em>Sanctify yourselves</em>. Because God wants to do wonders.</p>
+
+</div></div></div>
+
+<div class="gold-rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
+
+<div class="section"><div class="page"><div class="prose">
+
+<p>We see the same pattern with every person God raised up. He doesn't need a mass &mdash; He needs a few who will consecrate themselves and carry His glory.</p>
+
+<div class="examples-grid">
+  <div class="ex-card ex-fire">
+    <div class="ex-label">Joshua</div>
+    <h3>Apprentice to Leader</h3>
+    <p>Had to shift his mind from serving Moses to leading millions. God charged him: "Be strong and courageous." Then sent him to the people to take the land.</p>
+  </div>
+  <div class="ex-card ex-gold">
+    <div class="ex-label">Gideon</div>
+    <h3>300 Against 120,000</h3>
+    <p>Hiding in a winepress. God called him "man of valor." Reduced his army from thousands to 300. The Midianites fell like sand &mdash; it is not by might, not by power, but by My Spirit.</p>
+  </div>
+  <div class="ex-card ex-ember">
+    <div class="ex-label">Moses</div>
+    <h3>"You Will Be As God"</h3>
+    <p>Take your shoes off &mdash; don't bring where you've been into this holy place. God shifted his identity: "You will be as God to Pharaoh. When you speak, I move."</p>
+  </div>
+  <div class="ex-card ex-deep">
+    <div class="ex-label">Samson</div>
+    <h3>The Spirit of Might</h3>
+    <p>Ropes, shackles, every kind of bondage &mdash; broken like nothing. God giving us a picture: nothing should be able to hold you. The spirit of might breaks it off.</p>
+  </div>
+</div>
+
+<div class="examples-grid">
+  <div class="ex-card ex-gold">
+    <div class="ex-label">Elijah</div>
+    <h3>Life Resurrecting Life</h3>
+    <p>Called down fire. Laid on the dead child of the widow &mdash; the life of God on him resurrected that child. The life upon us is supposed to resurrect life in those who are dying.</p>
+  </div>
+  <div class="ex-card ex-fire">
+    <div class="ex-label">Peter &amp; Paul</div>
+    <h3>Shadow &amp; Handkerchief</h3>
+    <p>Peter's shadow healed people as he walked by. Paul couldn't reach everyone, so handkerchiefs that touched his body healed the sick. It has always been God's will to work through us.</p>
+  </div>
+</div>
+
+<div class="gq">
+  <blockquote>We have to adjust to greatness. Mediocrity is so normal. Paycheck to paycheck is so normal. You have to adjust to victory. You have to adjust to dominion.</blockquote>
+  <div class="attr">Pastor Tasha</div>
+</div>
+
+</div></div></div>
+
+<div class="ch-divider"><div class="div-dot"></div></div>
+
+
+<!-- ======================== III. OLD WINESKIN ======================== -->
+<div class="s-head">
+  <div class="s-num">The Wineskin</div>
+  <h2>The Old System <em>Cannot Contain</em> What God Is Pouring</h2>
+  <div class="s-sub">You cannot put new wine into old wineskins.</div>
+</div>
+
+<div class="section"><div class="page"><div class="prose">
+
+<div class="ribbon">
+  <div class="ribbon-ref">Mark 2:22</div>
+  <p>"No one puts new wine into old wineskins, or else the new wine will burst the wineskins and the wine is spilled, and the wineskins are ruined. But <em>new wine must be put into new wineskins</em>."</p>
+</div>
+
+<p>Old wineskins are dry and rigid. New wine ferments, bubbles, needs room to expand. Jesus is using this to describe people who are stuck &mdash; stuck in the same prayer, the same worship, the same mentality, the same level of revelation. And God is trying to pour something new, and the old container cannot hold it.</p>
+
+<div class="split">
+  <div class="split-old">
+    <div class="split-tag">Old Wineskin</div>
+    <h3>Salvation-focused Christianity</h3>
+    <p>All have sinned &mdash; so we preach blood, repentance, grace, mercy. Get saved, do Bible study, get plugged into church. But we have not taught how to walk in the glory that we lost.</p>
+  </div>
+  <div class="split-new">
+    <div class="split-tag">New Wineskin</div>
+    <h3>Walking in the glory</h3>
+    <p>Christ in you is the hope of restoring that glory. Not just stopping sin &mdash; but walking in dominion, execution, and the divine capacity that comes from being one with Him.</p>
+  </div>
+</div>
+
+<div class="ribbon">
+  <div class="ribbon-ref">Romans 3:23</div>
+  <p>"For all have sinned and <em>fall short of the glory</em> of God."</p>
+</div>
+
+<div class="dark-panel">
+  <div class="dp-label">The Missing Half</div>
+  <h3>We preached the solution to sin. We never preached the restoration of glory.</h3>
+  <p>Western Christianity captured the sin problem but missed the glory problem. All have sinned <strong>and</strong> fall short of the glory. There's the sin issue &mdash; then there's the <em>dominion issue</em>. The glory issue. The standard-of-living issue. We've been treating half the diagnosis.</p>
+</div>
+
+<p>If you are demanding things go your way, operating according to how you've always done it, you will look at the end of your life and all you will have is regrets. You live one time. You don't get to do 25 over. The level of impact at the end of your life depends on whether you were able to <em>shed the old, take on the new</em> &mdash; and move with God.</p>
+
+<div class="gq">
+  <blockquote>Revival is yesterday's move. Revival days are over. It's the glory days now. The individuals have to carry the presence. I have to carry God.</blockquote>
+  <div class="attr">Pastor Tasha</div>
+</div>
+
+</div></div></div>
+
+<div class="ch-divider"><div class="div-dot"></div></div>
+
+
+<!-- ======================== IV. CHRIST IN YOU ======================== -->
+<div class="s-head">
+  <div class="s-num">The Revelation</div>
+  <h2>Christ In You &mdash; The Hope of <em>Glory</em></h2>
+  <div class="s-sub">Not the seated Christ. The Christ within.</div>
+</div>
+
+<div class="section"><div class="page"><div class="prose">
+
+<div class="ribbon">
+  <div class="ribbon-ref">Colossians 1:26&ndash;27</div>
+  <p>"The mystery which has been hidden from ages and from generations, but now has been revealed to His saints &mdash; <em>Christ in you, the hope of glory</em>."</p>
+</div>
+
+<p>We think "the hope of glory" means making it to heaven. It does not. All have sinned and fallen short of a <em>standard of living</em>, a standard of execution, a kind of walk, a level of dominion. But Christ in you is the hope of you <strong>restoring that place of dominion</strong>.</p>
+
+<p>That is why Paul can turn around and say "I can do all things through Christ." It is Christ <em>in</em> you. Not the seated Christ you pray up to. The seated Christ is saying: you are filled with my Spirit. Rise up and walk. Do it. Speak to it. If you speak to it, my Spirit within you is addressing it.</p>
+
+<div class="term-card">
+  <div class="term-label">"Where my strength ends, His begins."</div>
+  <div class="term-name">Christ-Consciousness</div>
+  <div class="term-def">Shifting from self &mdash; my failures, my insecurities, my weakness &mdash; to the Christ within. There is another power on the inside. Another strength. Where your capacity ends, His begins. He completes you.</div>
+</div>
+
+<div class="dark-panel">
+  <div class="dp-label">The Diagram</div>
+  <h3>Self-Conscious vs. Christ-Conscious</h3>
+  <p>When God gives you a mandate, He is <strong>not speaking to you</strong>. He is speaking to the <em>Christ in you</em>. The spirit realm sees you and says: "He's a threat." So the enemy's strategy is to keep you focused on yourself &mdash; your issues, your weakness, your history &mdash; so you never shift to the power within.</p>
+</div>
+
+<div style="margin:36px 0;padding:40px 24px;background:var(--white);border-radius:var(--radius);border:2px solid rgba(201,162,39,0.1);box-shadow:var(--shadow-soft);text-align:center">
+  <div style="font-family:'Nunito',sans-serif;font-size:0.5rem;font-weight:800;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px">See The Shift</div>
+  <div class="consciousness-viz">
+    <div class="c-circle c-self">
+      <h4>Self</h4>
+      <p>My failures, my pain, my limits</p>
+    </div>
+    <div class="c-arrow">&rarr;</div>
+    <div class="c-circle c-christ">
+      <h4>Christ</h4>
+      <p>His power, His glory, His capacity</p>
+    </div>
+  </div>
+  <p style="font-family:'Lora',serif;font-size:0.85rem;font-style:italic;color:var(--text-muted);max-width:440px;margin:0 auto;line-height:1.6">The focus has to shift. When it does, everything changes &mdash; your prayer life, your courage, your capacity.</p>
+</div>
+
+<div class="recognition">
+  <div class="rec-tag">This Is Why You Struggle</div>
+  <p>You are going to be insecure in your own humanity. You don't have what it takes to do what He's asking. But if you shift off of being self-centered and focus on the <strong>Christ within</strong> &mdash; there is another power on the inside. Another strength. Where your strength fails, He picks up. Your capacity is enlarged. You are no longer operating as a mere human.</p>
+</div>
+
+<div class="gq">
+  <blockquote>Can you curse Christ? Can you bind Christ? Can you put Him in shackles? Can you stop Him? If you can't stop Him, and He's in me &mdash; you can't stop me.</blockquote>
+  <div class="attr">Pastor Tasha</div>
+</div>
+
+<div class="think">
+  <div class="think-label">Let This Land</div>
+  <p>Every prophetic word you received and never walked in. Every calling you felt but talked yourself out of. Every time the enemy convinced you to focus on your weakness instead of the Christ within. That is the war. Self-consciousness is the prison. Christ-consciousness is the key that has been in your pocket the entire time.</p>
+</div>
+
+</div></div></div>
+
+<div class="ch-divider"><div class="div-dot"></div></div>
+
+
+<!-- ======================== V. ADAM'S CAPACITY ======================== -->
+<div class="s-head">
+  <div class="s-num">The Original Design</div>
+  <h2>You Were Never Meant to Operate As a <em>Mere Human</em></h2>
+  <div class="s-sub">God gave Adam instruction based on divine capacity, not human limits.</div>
+</div>
+
+<div class="section"><div class="page"><div class="prose">
+
+<p>When God created Adam before the fall, there was a oneness with God. Adam's spirit was one with God's Spirit. So when God gave instruction, He did not give it based on human capacity. He gave it based on the fact that <em>you are linked with Me</em>.</p>
+
+<p>Subdue the earth. Not your backyard &mdash; the <strong>earth</strong>. Name every creature. That's taxonomy &mdash; calling each thing according to its essence. This is not something one person does unless you have <em>divine capacity</em>. Unless you are linked to a source that empowers you to do more than a human can do, to see more than a human can see, to take more than a human can take.</p>
+
+<div class="dark-panel">
+  <div class="dp-label">What We Lost</div>
+  <h3>Falling from the glory means losing the capacity that came from being linked with God.</h3>
+  <p>Now you operate as mere men. You can't handle much. You can't take much. "I can't deal with this." "It's too much." "I'm overwhelmed." That's a human being operating <strong>without divine capacity</strong>.</p>
+  <p>But when you were linked with Him &mdash; there was capacity. God's heart is not just for you to stop sinning. You can't stop sinning unless you have <em>divine capacity over sin</em>. That's why you fall, repent, fall, repent, fall, repent &mdash; over and over. You have no capacity over sin.</p>
+</div>
+
+<div class="think">
+  <div class="think-label">The Real Question</div>
+  <p>God never intended to work apart from us. From the very beginning, His design was oneness. Every miracle in scripture &mdash; Moses, Gideon, Samson, Elijah, Peter, Paul &mdash; was just God giving us a glimpse of what becomes possible when a person is linked to the divine. And none of them even had what we have. In the Old Testament, the Spirit came <em>upon</em>. Today, the Spirit lives <em>within</em>.</p>
+</div>
+
+</div></div></div>
+
+<div class="ch-divider"><div class="div-dot"></div></div>
+
+
+<!-- ======================== VI. THE CALL ======================== -->
+<div class="s-head">
+  <div class="s-num">The Mandate</div>
+  <h2>God Is Doing It Again. <em>Right Here.</em></h2>
+  <div class="s-sub">There has to be a house in Tulsa that carries the glory.</div>
+</div>
+
+<div class="section"><div class="page"><div class="prose">
+
+<p>There are over 4,000 churches in Tulsa County. There has to be a house that carries the glory. Not about numbers. Not about fame. Not about preaching self-help. A house that is 100% focused on the kingdom of God and the glory of God. A house willing to sacrifice until we see the manifestation of the hand of God.</p>
+
+<div class="gq">
+  <blockquote>It is not by might. It is not by power. It is by My Spirit, says the Lord.</blockquote>
+  <div class="attr">Zechariah 4:6</div>
+</div>
+
+<p>God spoke to Tasha. Tasha is speaking to you. God wants to take this city. And the enemy wants you to see yourself as a grasshopper &mdash; too little, not enough, too weak, too divided. Die to that grasshopper mentality. It is not by might, not by connections, not by money. It is by the <em>very Spirit of the Lord</em>.</p>
+
+<div class="dark-panel">
+  <div class="dp-label">The Commitment</div>
+  <h3>Tuesday. All day. Every week.</h3>
+  <p>We have committed to tithe one day a week. Tuesday &mdash; fasting the entire day, from the moment your eyes open to the moment your eyes close. Then come together at 7:30 for prayer.</p>
+  <p><strong>This is not fasting for your issues.</strong> This is not self-focused prayer. This is focused on the <em>Christ within</em>. So that God can sanctify us, consecrate us, and the revelation of what is being taught can come alive on the inside.</p>
+</div>
+
+<div class="recognition">
+  <div class="rec-tag">The City on a Hill</div>
+  <p>Before Jesus talks about a city set on a hill, He talks about a <strong>person</strong>. "You are the light of the world." The city is always tied to a person. If God wants a city, He first has to find a person. That person becomes the light. The Spirit on that one person ignites many others. And with the others, He takes the city.</p>
+</div>
+
+<div class="think">
+  <div class="think-label">This Has To Become Reality</div>
+  <p>It's not going to work as head knowledge. It's not going to work with you just saying "Amen, good word Pastor." It has to become reality. You have to become it. And that requires spending time on your face before the Lord. Not fasting for your problems &mdash; focused on the Christ within.</p>
+</div>
+
+</div></div></div>
+
+
+<!-- ======================== FINALE ======================== -->
+<div class="finale">
+  <img src="/zions-logo.png" alt="" class="finale-logo">
+  <h2>Partakers of the <span>Divine Nature</span></h2>
+  <p>The shift is not an event. It is a revelation. When it moves from your head to your heart &mdash; when you stop seeing yourself and start seeing the Christ within &mdash; it's over. For Tulsa. For the enemy. For every limitation you thought defined you.</p>
+  <p>You were never meant to operate as a mere human.</p>
+</div>
+
+<footer>
+  <p>"Grace and peace be multiplied to you in the knowledge of God." &mdash; 2 Peter 1:2</p>
+  <div class="brand">Zion's Gates Ministries</div>
+</footer>
+
+</body>
+</html>

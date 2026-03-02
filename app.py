@@ -10,7 +10,7 @@ def index():
 
 # ── Slug-based reader route ──────────────────────────────
 slug_to_file = {
-    # "slug-name": "Asset_Filename.html",
+    "carnality-vs-divinity": "Carnality_Vs_Divinity.html",
 }
 
 @app.route("/read/<slug>")
